@@ -64,7 +64,7 @@ claim → risk → oracle → design → prove the instrument → run → read �
 | **17 playbooks** | By kind of work. See [the table below](#playbooks). |
 | **10 lenses** | `software`, `firmware`, `hardware`, `manufacturing`, `performance`, `genai`, `ml-training`, `data`, `security`, and the `regulated` overlay. They stack. |
 | **16 principles** | Short, model-only rules the agent reads in full and cites when they change a decision. |
-| **6 workflow skills** | `create-harness`, `test-design-techniques`, `mutation-check`, `test-review`, `grill-the-plan`, `qstack-init`. |
+| **7 workflow skills** | `create-harness`, `test-design-techniques`, `mutation-check`, `test-review`, `grill-the-plan`, `qstack-setup`, `qstack-help`. |
 | **2 agents** | `test-reviewer` reviews checks it did not write. `adversarial-tester` tries to break a feature on an approved environment. |
 | **Guard hook** | Blocks new fixed sleeps and reasonless skips in test code. Asks before mutating protected hosts or running irreversible device commands such as fuse burning. |
 | **References and scripts** | Spec-audit method, Given/When/Then rules, failure taxonomy, flaky causes, exploration and oracle heuristics, the AI eval method, and reliability statistics. Scripts for spec-audit coverage, case linting, and coverage checks. |
@@ -134,9 +134,9 @@ Ask in plain words. The session hook sends qualifying tasks to `q-mode`, which p
 | "Prepare the IEC 62304 evidence for release." | software, regulated | Gate review |
 | "How would we even test this?" | any | Design the verification |
 
-Direct entries: `/qstack:q-mode`, `/qstack:create-harness`, `/qstack:test-review`, `/qstack:mutation-check`, `/qstack:test-design-techniques`, `/qstack:grill-the-plan`, `/qstack:qstack-init`.
+Direct entries: `/qstack:q-mode`, `/qstack:create-harness`, `/qstack:test-review`, `/qstack:mutation-check`, `/qstack:test-design-techniques`, `/qstack:grill-the-plan`, `/qstack:qstack-setup`, `/qstack:qstack-help`.
 
-Set `QSTACK_SESSION_HOOK=off` to turn off the routing mandate without uninstalling.
+To turn off the routing mandate, run `/qstack:qstack-setup` and choose `session hook: off`, or set `QSTACK_SESSION_HOOK=off`.
 
 ## How it works
 
@@ -165,7 +165,7 @@ A team that wants qstack to remember project facts can keep any of these. All ar
 
 | File | Purpose |
 |------|---------|
-| `.qstack/profile.md` | Active lenses, artifact identity, run commands per layer, environments and rigs, conventions, test data, evidence paths, tracker policy, standards, reviewers. Generate it with `/qstack:qstack-init`. |
+| `.qstack/profile.md` | Active lenses, artifact identity, run commands per layer, environments and rigs, conventions, test data, evidence paths, tracker policy, standards, reviewers. Generate it with `/qstack:qstack-setup`. |
 | `.qstack/harness.md` | How to set up, check, drive, observe, and clean up the system under test, proven by running it. Generate it with `/qstack:create-harness`. |
 | `.qstack/protected-hosts` | Hosts the guard protects from mutating calls and test runs. One per line. |
 | `.qstack/protected-commands` | Regular expressions for your irreversible commands. One per line. |

@@ -15,7 +15,7 @@ Use the `qstack:q-mode` skill and follow it when a task does one of these things
 - Analyzes an escaped defect.
 - Asks how to verify something.
 
-When the intent is specific, go directly to one of these skills: `qstack:test-review`, `qstack:mutation-check`, `qstack:test-design-techniques`, `qstack:create-harness`, `qstack:grill-the-plan`, `qstack:qstack-init`.
+When the intent is specific, go directly to one of these skills: `qstack:test-review`, `qstack:mutation-check`, `qstack:test-design-techniques`, `qstack:create-harness`, `qstack:grill-the-plan`, `qstack:qstack-setup`, `qstack:qstack-help`.
 
 User instructions (CLAUDE.md, AGENTS.md, direct requests) have priority. Product-code changes keep their own workflow.
 </qstack>

@@ -1,9 +1,9 @@
 <qstack>
-You have qstack, a quality-engineering operating mode for software, firmware, hardware, manufacturing, data, and regulated products.
+You have qstack, a quality-engineering operating mode for any field: software, firmware, hardware, manufacturing, performance, GenAI features, model training, data, security, and regulated products.
 
-Invoke the `qstack:q-mode` skill and follow it when a task: reviews requirements or a spec for testability; analyzes risk or builds an FMEA; plans, designs, writes, or reviews tests; triages failing or flaky tests; reproduces or reports a defect; selects regression tests; runs an exploratory session; validates firmware or hardware; checks production quality; assembles compliance evidence; decides release readiness; analyzes an escaped defect; or evaluates an LLM or agent feature.
+Invoke the `qstack:q-mode` skill and follow it when a task: reviews requirements or a spec for testability; analyzes risk or builds an FMEA; plans, designs, writes, or reviews tests or evals; runs a test campaign such as load, stress, soak, environmental, or eval runs; triages failing or flaky checks; reproduces or reports a defect; assesses the impact of a change; runs an exploratory session; prepares a release or gate decision; audits a suite, eval set, or production station; analyzes an escaped defect; or asks how to verify something.
 
-Enter directly when the intent is specific: `qstack:shift-left` (spec to traceable test artifacts), `qstack:test-review`, `qstack:mutation-check`, `qstack:test-design-techniques`, `qstack:grill-the-plan`, `qstack:qstack-init`.
+Enter directly when the intent is specific: `qstack:test-review`, `qstack:mutation-check`, `qstack:test-design-techniques`, `qstack:create-harness`, `qstack:grill-the-plan`, `qstack:qstack-init`.
 
 User instructions (CLAUDE.md, AGENTS.md, direct requests) take precedence. Product-code changes keep their own workflow.
 </qstack>

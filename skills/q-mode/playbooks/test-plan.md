@@ -4,7 +4,7 @@
 
 For a feature or a release.
 
-1. Size the input. A release planned from a spec set runs the **shift-left** skill's Stages 1 to 3 (quality brief, test goals, test plan), each stopping at its gate. Run Stage 0 first when the spec has not been audited. Everything else runs the steps below with `references/templates/test-plan.md`.
+1. Size the input. A release planned from a full spec set runs the **Shift-left** playbook, Stage 0 first when the spec has not been audited. Everything else runs the steps below.
 2. Inventory what changed from artifacts, not titles: the diff or merge list, release notes, tickets, API schema diff, migrations, flags, and dependency bumps. Verify each change against the artifact (method, fields, existence) before planning around it. Mismatches become open questions.
 3. Build the risk map: each area gets likelihood, impact, level, and the reason (**principle-risk-before-coverage**). Include non-functional risk (security, performance, accessibility, compatibility, data migration) only when a reason puts it on the map.
 4. For each risk choose the coverage: the layer (**principle-cheapest-layer-that-catches-it**), technique, oracle source, data, environment, and whether it is automated, manual, or an exploratory charter.

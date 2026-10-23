@@ -1,0 +1,26 @@
+### Shift-left
+
+**You own traceability from spec to case. Find the spec's defects first, then plan, then write cases that trace back to it.**
+
+For a spec set (PRD, SRS, architecture, data model, API contracts, design rules) that needs a full audit and traceable cases before or alongside development. For a single story or small change, use **Requirements review**, **Test plan**, and **Test design** instead.
+
+Deliver each stage's output in the reply, or where the tester asks. Do not create tracking files, folders, or process documents the tester did not ask for. The spec is read-only.
+
+| Stage | Uses | Output | Gate question |
+|-------|------|--------|---------------|
+| 0 Spec audit | **principle-label-the-unknowns**, **principle-oracle-first**, `references/spec-audit.md`, `scripts/audit_coverage.py` | Open questions with type, source, blocks, owner, status, and section and column coverage | Which blocking questions need an owner's answer before planning? |
+| 1 Plan | **principle-risk-before-coverage**, **principle-cheapest-layer-that-catches-it**, **principle-protect-shared-environments**, active lenses | Quality brief, goals, risk map and strategy, entry and exit criteria | Are scope, goals, priorities, strategy, and criteria right and feasible? |
+| 2 Cases | **test-design-techniques**, **principle-oracle-first**, **principle-isolate-test-data**, **principle-author-is-not-approver**, `references/gwt-rules.md`, `scripts/gwt_lint.py`, `qstack:test-reviewer` | Scenarios per goal, environment and data per scenario, Given/When/Then cases | Any missing negative, boundary, or cross-role scenario? Can the data be provisioned? |
+| 3 Coverage check | **principle-risk-before-coverage**, **principle-evidence-not-claims**, `scripts/qa_status.py` | Coverage by priority, scenarios without a case, goals without a scenario | Are the remaining gaps acceptable? An uncased P0 never is. |
+
+Scripts live in this skill's `scripts/` directory. Run them with that absolute path.
+
+1. **Fix the spec scope.** List every file of the spec source recursively and classify each as include (requirements, data model, contracts, design rules, known-issue lists) or exclude (code, binaries, tooling), with a reason. Confirm the scope with the tester when any classification is uncertain. Record the source and its version or commit so the audit can be reproduced.
+2. **Stage 0, spec audit.** Follow `references/spec-audit.md`: inventory sections and columns with `audit_coverage.py inventory`, run the three layers (mechanical cross-reference with a per-column scan, semantic conflict probes, implicit assumptions), then confirm with `audit_coverage.py verify` that every section and column has a status. Every finding is an open question with `type`, `source`, `blocks` (`plan`, `cases`, or `none`), `owner`, and `status`. Stop at the gate.
+3. **Stage 1, plan.** Build on resolved questions and keep open ones visible. Quality brief: business goals and the risk each carries, in and out of scope, environments, roles, platforms, external dependencies and how real sends are avoided, and this cycle's two to five focus alerts. Goals: `G1`, `G2`, each with spec reference, quality risk, and priority, none so narrow it cannot yield a happy, a negative, and a boundary scenario. Strategy per goal: test types, layer, technique, oracle source, automation approach, and tactical risk with mitigation. Entry and exit criteria as checkable conditions. Stop at the gate.
+4. **Stage 2, cases.** For each goal, scenarios `G1-S1`, `G1-S2` across the lenses positive, negative, boundary, cross-role, and data integrity, each with a one-line objective, priority, spec reference, test type, and whether it needs an oracle for a computed or persisted value. For each scenario, its environment and data, tied to real schema fields, with the provisioning method and the oracle for computed values (`oracle == api == db`). Then one case per scenario, P0 first, in Given/When/Then per `references/gwt-rules.md`, linted with `gwt_lint.py` (add the team-language vague words with `--banned`), and reviewed by `qstack:test-reviewer`. Stop at the gate for each batch.
+5. **Stage 3, coverage check.** Report the gaps, not a document: coverage by priority, scenarios without a case, and goals or requirements without any scenario. When the tester keeps a traceability table (CSV columns `case_id, goal_id, scenario_id, priority, spec_ac, test_type, stage_status`, with `stage_status` one of `scenario`, `case`), `qa_status.py rtm <table.csv> --goals <plan file>` computes this, and `--fail-on-p0` turns an uncased P0 into a failing exit code for CI. Produce the full requirement-to-case matrix (`--full`) only when the regulated lens is active, a customer or contract requires it, or the tester asks.
+
+When the work spans sessions, keep the open questions, the plan, and the traceability table where the tester chooses, and resume from them. Under an explicit instruction to run several stages in one go, continue and collect every gate question in one list at the end.
+
+**Reply:** per stage, the output, its self-check result, and the gate question. At Stage 3, coverage by priority and the gap list, with the full matrix only when it was required.

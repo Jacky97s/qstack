@@ -3,9 +3,9 @@
 > Read by every qstack playbook. Fill every slot, or mark it `n/a: <reason>` or `unknown: <open question>`.
 > Never put secret values here. Point at where they live.
 
-## Domain
+## Lenses
 
-- **Domain:** <software | firmware | hardware | manufacturing | data/ML | mixed>
+- **Active lenses:** <one or more of: software, firmware, hardware, manufacturing, performance, genai, ml-training, data, security, regulated>
 - **Product and users:** <one line>
 - **Standards and levels:** <e.g. none, WCAG 2.2 AA, ISO 26262 ASIL B, IEC 62304 class B>
 - **Report language:** <language for prose; machine tokens stay English>
@@ -56,6 +56,10 @@
 - **Tags or markers:** <smoke, regression, ...>
 - **Assertion style:** <library and idioms>
 
+## Harness
+
+- **Harness:** `.qstack/harness.md` <or `n/a: <reason>`>
+
 ## Evidence
 
 - **Reports, traces, screenshots, logs:** <paths>
@@ -64,7 +68,6 @@
 ## Requirements and traceability
 
 - **Spec sources:** <where requirements live>
-- **Shift-left project folder:** <path or n/a>
 - **Requirement ID format:** <e.g. AC-123, REQ-4.2>
 
 ## Tracker and people

@@ -1,5 +1,5 @@
 qstack
-Copyright (c) 2026 qstack contributors
+Copyright (c) 2026 Jacky Tan
 Licensed under the MIT License. See LICENSE.
 
 This project builds on pstack.
@@ -21,9 +21,15 @@ What qstack takes from pstack:
     when they change a decision, a SessionStart hook that injects the routing
     mandate, and project playbooks that extend bundled ones by anchoring to
     quoted step text.
-  - skills/principle-test-behavior-not-implementation adapts pstack's
-    principle of the same name.
+  - skills/principle-test-behavior-not-implementation and
+    skills/principle-explain-the-number adapt pstack's principles of the
+    same names.
+  - skills/create-harness follows the shape of pstack's
+    create-verification-skill and maintain-verification-skill (interview the
+    repository, generate a launch, doctor, drive, evidence, and cleanup
+    recipe, prove it by running it, keep it honest with a refresh pass),
+    generalized from apps to rigs, stations, pipelines, and eval runners.
 
-Everything else in qstack (the QA playbooks, the other principles, the
-shift-left pipeline, the guard hook, the agents, the references, and the
-scripts) is original to qstack.
+Everything else in qstack (the core loop, the lenses, the QA playbooks, the
+other principles, the guard hook, the agents, the
+references, and the scripts) is original to qstack.

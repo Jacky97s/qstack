@@ -8,7 +8,7 @@ user-invocable: false
 
 An unlabeled gap turns into either a silent assumption or a list of "to be confirmed" items that blocks everything and nothing. A label says what kind of unknown it is, who can resolve it, and exactly what waits on it.
 
-Each unknown is an open question with these fields (the format the **shift-left** skill's Stage 0 uses):
+Each unknown is an open question with these fields (the format of the spec audit in `../q-mode/references/spec-audit.md`):
 
 - **type:** `contradiction`, `gap`, `ambiguity`, `tbd`, `type-mismatch`, or `implicit-assumption`.
 - **source:** where it came from, cited (`doc §section` vs `doc §section`, `file:line`, schema path).

@@ -1,6 +1,6 @@
 ---
 name: qstack-init
-description: "Create or refresh this project's qstack profile at .qstack/profile.md by interviewing the repository first and the operator second: domain, artifact identities, run commands per layer, environments and rigs, protected hosts and irreversible commands, data provisioning, conventions, evidence location, tracker, standards, and reviewers. Use for /qstack-init, setting up qstack in a repo, or when a playbook reports a missing profile slot."
+description: "Create or refresh this project's qstack profile at .qstack/profile.md by interviewing the repository first and the operator second: active lenses, artifact identities, run commands per layer, environments and rigs, protected hosts and irreversible commands, data provisioning, conventions, evidence location, tracker, standards, and reviewers. Use for /qstack-init, setting up qstack in a repo, or when a playbook reports a missing profile slot."
 ---
 
 # qstack-init
@@ -11,14 +11,14 @@ The profile is where everything project-specific lives, so the rest of qstack st
 
 Answer what you can from the codebase and its documents, citing where each answer came from:
 
-- **Domain:** software, firmware, hardware, manufacturing, data or ML, or a mix (`../q-mode/references/domains.md`).
+- **Lenses:** which of the lenses in `../q-mode/lenses/README.md` apply (software, firmware, hardware, manufacturing, performance, genai, ml-training, data, security, and the regulated overlay). Lenses stack.
 - **Artifact identity:** how a tested artifact is identified (commit, image digest, firmware hash, hardware revision, serial, lot).
 - **Layers and run commands:** the exact command for each layer that exists (unit, integration, end-to-end, simulation, rig), as CI runs them. Read the CI configuration, package scripts, makefiles, and test config.
 - **Environments and rigs:** local, disposable, shared, and production, with how each is reached. Rigs, benches, stations, and device farms, with their doctor checks.
 - **Conventions:** test layout, naming, fixtures, page or screen objects, factories, markers or tags, and assertion style. Note them as found, not as you would prefer.
 - **Data:** how test data is provisioned and cleaned.
 - **Evidence:** where reports, traces, screenshots, logs, and measurement records go.
-- **Spec sources:** where requirements live, and whether a shift-left project folder exists.
+- **Spec sources:** where requirements live.
 
 ## 2. Ask the operator only what the repository cannot show
 
@@ -36,3 +36,5 @@ Never write secrets into these files. Point at where credentials live.
 ## 4. Prove it
 
 Run one cheap command from the profile (the fastest test layer, or a rig doctor check) and confirm it behaves as the profile says. A profile whose commands were never run is a draft. Report which slots were verified by running, which were read from files, and which came from the operator.
+
+When the project has no repeatable way to set up, check, drive, and observe the system under test, offer the **create-harness** skill next.

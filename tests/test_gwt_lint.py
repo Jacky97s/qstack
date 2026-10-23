@@ -4,7 +4,7 @@ import sys
 import tempfile
 import unittest
 
-LINT = os.path.join(os.path.dirname(__file__), "..", "skills", "shift-left", "scripts", "gwt_lint.py")
+LINT = os.path.join(os.path.dirname(__file__), "..", "skills", "q-mode", "scripts", "gwt_lint.py")
 
 CASE = """# G1-S1
 ## Given

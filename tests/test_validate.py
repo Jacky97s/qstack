@@ -49,6 +49,18 @@ class Validate(unittest.TestCase):
         p.write_text(p.read_text().replace("name: mutation-check", "name: mutation"))
         self.assertIn("!= directory 'mutation-check'", self.run_validate()[1])
 
+    def test_catches_lens_missing_a_slot(self):
+        p = self.repo / "skills/q-mode/lenses/performance.md"
+        p.write_text(p.read_text().replace("## Oracle sources", "## Oracles"))
+        self.assertIn("lens performance: headings must be", self.run_validate()[1])
+
+    def test_catches_unindexed_lens(self):
+        src = (self.repo / "skills/q-mode/lenses/data.md").read_text()
+        (self.repo / "skills/q-mode/lenses/robotics.md").write_text(src)
+        out = self.run_validate()[1]
+        self.assertIn("lens robotics.md is not in the index", out)
+        self.assertIn("lens robotics is not listed", out)
+
     def test_catches_denylisted_term(self):
         (self.repo / ".denylist").write_text("acme-internal\n")
         self.append("README.md", "\nBuilt for acme-internal.\n")

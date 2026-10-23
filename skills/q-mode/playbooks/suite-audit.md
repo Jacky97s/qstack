@@ -2,6 +2,8 @@
 
 **You own the truth about the suite. Find the false confidence first.**
 
+A suite is any set of checks the team relies on: automated tests, an eval set, rig scripts, or the stations and inspections of a production line.
+
 1. Inventory: tests by layer, runtime per layer, slowest tests, flake rate from CI history, skipped and quarantined tests with their age, and tests that never failed in the history you can reach.
 2. Sample review on the riskiest modules with the `qstack:test-reviewer` agent and the **test-review** rubric. Weak oracles and implementation-pinned tests come first.
 3. Mutation sampling on the critical paths with the **mutation-check** skill. Each surviving mutant is a place the suite claims protection it does not give.

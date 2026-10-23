@@ -2,7 +2,7 @@
   "name": "qstack",
   "description": "qstack: a quality-engineering operating mode for AI agents, for software, firmware, hardware, and regulated products.",
   "owner": {
-    "name": "qstack contributors"
+    "name": "Jacky Tan"
   },
   "plugins": [
     {

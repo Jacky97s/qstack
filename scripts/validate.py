@@ -7,6 +7,7 @@
 - relative links and backticked bundled paths resolve
 - every principle-<x> and qstack:<x> mentioned exists
 - q-mode's playbook index and playbooks/ match exactly
+- every lens has the fixed headings in order, and the lens index and q-mode list match the files
 - plugin.json and marketplace.json parse and agree on name and version
 - optional: no term from a local, untracked .denylist appears (keeps company names out)
 """
@@ -62,7 +63,7 @@ for name, path in agents.items():
         err(f"{path}: agent needs name == filename and a description")
 
 LINK = re.compile(r"\]\(([^)#\s]+)(#[^)]*)?\)")
-TICKED = re.compile(r"`((?:\.\./[\w-]+/)?(?:playbooks|references|templates|scripts)/[\w./-]+\.(?:md|py|csv))`")
+TICKED = re.compile(r"`((?:\.\./[\w-]+/)?(?:playbooks|references|templates|scripts|lenses)/[\w./-]+\.(?:md|py|csv))`")
 PRINCIPLE = re.compile(r"\bprinciple-[a-z0-9-]+[a-z0-9]")
 NAMESPACED = re.compile(r"`qstack:([a-z0-9-]+)`")
 
@@ -101,6 +102,27 @@ for name in skills:
         if not re.search(r"\*\*" + r"[\s,]+".join(title_words), qmode, re.IGNORECASE):
             err(f"q-mode: principle {name} is not in the principles index")
 
+LENS_HEADINGS = ["Artifact identity", "Stimulus and observation", "Instruments and trust",
+                 "Variation and sampling", "Cost and reversibility", "Oracle sources",
+                 "Gates and standards", "Layer ladder", "Typical risks", "Failure classes",
+                 "Playbook notes"]
+lens_dir = ROOT / "skills/q-mode/lenses"
+lens_files = {p.stem for p in lens_dir.glob("*.md") if p.name != "README.md"}
+for name in sorted(lens_files):
+    found = re.findall(r"^## (.+)$", (lens_dir / f"{name}.md").read_text(encoding="utf-8"), re.MULTILINE)
+    if found != LENS_HEADINGS:
+        missing = [h for h in LENS_HEADINGS if h not in found]
+        err(f"lens {name}: headings must be exactly {LENS_HEADINGS} in order"
+            + (f"; missing {missing}" if missing else f"; found {found}"))
+lens_index = set(re.findall(r"^\| \[([a-z0-9-]+)\]\(\1\.md\) \|", (lens_dir / "README.md").read_text(encoding="utf-8"), re.MULTILINE))
+for missing in sorted(lens_files - lens_index):
+    err(f"lenses/README.md: lens {missing}.md is not in the index")
+for missing in sorted(lens_index - lens_files):
+    err(f"lenses/README.md: index names {missing} but lenses/{missing}.md does not exist")
+for name in sorted(lens_files):
+    if f"`{name}`" not in qmode:
+        err(f"q-mode: lens {name} is not listed in the Lenses section")
+
 try:
     plugin = json.loads((ROOT / ".claude-plugin/plugin.json").read_text())
     market = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text())
@@ -125,4 +147,4 @@ if errors:
     for e in errors:
         print("  - " + e)
     sys.exit(1)
-print(f"OK: {len(skills)} skills, {len(agents)} agents, {len(files)} playbooks")
+print(f"OK: {len(skills)} skills, {len(agents)} agents, {len(files)} playbooks, {len(lens_files)} lenses")

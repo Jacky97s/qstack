@@ -1,0 +1,29 @@
+qstack
+Copyright (c) 2026 qstack contributors
+Licensed under the MIT License. See LICENSE.
+
+This project builds on pstack.
+
+  pstack, by Lauren Tan
+  https://github.com/cursor/plugins/tree/main/pstack
+  MIT License, Copyright (c) 2026 Lauren Tan
+  Full text: licenses/pstack-cursor-plugins.LICENSE
+
+  pstack for Claude Code, a port by Michael Denyer
+  https://github.com/michael-denyer/pstack-claude
+  MIT License, Copyright (c) 2026 Lauren Tan, Copyright (c) 2026 Michael Denyer
+  Full text: licenses/pstack-claude.LICENSE
+
+What qstack takes from pstack:
+
+  - The architecture: a routing skill whose playbooks are copied into a
+    todolist verbatim, short model-only principle leaf skills that are cited
+    when they change a decision, a SessionStart hook that injects the routing
+    mandate, and project playbooks that extend bundled ones by anchoring to
+    quoted step text.
+  - skills/principle-test-behavior-not-implementation adapts pstack's
+    principle of the same name.
+
+Everything else in qstack (the QA playbooks, the other principles, the
+shift-left pipeline, the guard hook, the agents, the references, and the
+scripts) is original to qstack.

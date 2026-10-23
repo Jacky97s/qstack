@@ -1,0 +1,5 @@
+# Local list of company or customer names that must never ship. Read by scripts/validate.py.
+.denylist
+__pycache__/
+*.pyc
+.DS_Store

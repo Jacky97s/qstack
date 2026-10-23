@@ -1,0 +1,25 @@
+{
+  "name": "qstack",
+  "version": "0.1.0",
+  "description": "A quality-engineering operating mode for AI agents. Routes QA, verification, and release-confidence work across software, firmware, hardware, manufacturing, data, and regulated products to disciplined playbooks, and reports verdicts with evidence a reviewer can rerun.",
+  "author": {
+    "name": "qstack contributors"
+  },
+  "license": "MIT",
+  "keywords": [
+    "qa",
+    "sdet",
+    "testing",
+    "quality-engineering",
+    "test-automation",
+    "shift-left",
+    "firmware",
+    "hardware-validation",
+    "fmea",
+    "flaky-tests",
+    "mutation-testing",
+    "llm-evals",
+    "traceability",
+    "skills"
+  ]
+}

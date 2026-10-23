@@ -1,0 +1,15 @@
+{
+  "name": "qstack",
+  "description": "qstack: a quality-engineering operating mode for AI agents, for software, firmware, hardware, and regulated products.",
+  "owner": {
+    "name": "qstack contributors"
+  },
+  "plugins": [
+    {
+      "name": "qstack",
+      "source": "./",
+      "description": "Quality-engineering operating mode: playbooks, principles, reviewers, and guards for testing anything.",
+      "version": "0.1.0"
+    }
+  ]
+}

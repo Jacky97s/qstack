@@ -12,6 +12,9 @@ A quality-engineering operating mode for AI agents, for any field: software, fir
 
 </div>
 
+> [!WARNING]
+> **qstack is under heavy building and testing.** Skills, playbooks, lenses, and file layouts can change without notice between commits. qstack has not yet been evaluated against a baseline, so there is no measured proof yet that it improves agent results. Review every verdict and every change it makes before you rely on it.
+
 ---
 
 qstack turns a coding agent into a skeptical tester. It names the oracle before it writes a check. It ranks work by risk. It classifies a red result before touching it, proves its own checks can fail, refuses to retry its way to green, keeps its hands off shared environments and irreplaceable units, and reports every verdict with evidence you can rerun.

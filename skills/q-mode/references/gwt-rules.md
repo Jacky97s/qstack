@@ -1,28 +1,21 @@
 # Given/When/Then contract + self-check
 
-The whole point of strict GWT is to remove interpretation. A test case that a
-machine can run without guessing is also a test case a human reads the same way
-every time. These rules exist so that "automate this later" is a formatting
-change, not a rewrite.
+Strict GWT removes interpretation. A machine can run a test case without a guess. A human also reads the same test case in the same way every time. These rules make "automate this later" a formatting change and not a rewrite.
 
 ## Given — preconditions
 
-- **Fully expand.** No cross-references to other cases ("same as TC-3"). A
-  reader must get the full starting state from this case alone.
-- **Concrete UI/data state, not intent.** Write the observable state, e.g.
-  "logged in as role A; the list shows 1 order #1234 with status=pending" — not "user is ready
-  to confirm".
-- **Omit backend-invisible state** the tester can't see or set. If it matters,
-  it belongs in the scenario's environment and data plan and is provisioned there.
+- **Fully expand.** Do not refer to other cases ("same as TC-3"). A reader must get the full starting state from this case alone.
+- **Concrete UI/data state, not intent.** Write the observable state. For example, write "logged in as role A; the list shows 1 order #1234 with status=pending". Do not write "user is ready to confirm".
+- **Omit backend-invisible state** that the tester cannot see or set. If it matters, put it in the environment and data plan of the scenario. Provision it there.
 
 ## When — operations
 
-- **One step = one interaction.** Never bundle ("enter credentials and log in" is three steps).
-- **Approved verbs only.** A step must start with one of:
+- **One step = one interaction.** Do not combine interactions ("enter credentials and log in" is three steps).
+- **Approved verbs only.** A step must start with one of these verbs:
   `click / input / select / check / scroll / wait / navigate`
-  Plus, for API-level cases: `request`.
-  Each maps to a deterministic action; anything else hides ambiguity.
-- Reference the target by its visible label/role, and the value explicitly.
+  For API-level cases, add: `request`.
+  Each verb maps to a deterministic action. Any other verb hides ambiguity.
+- Name the target by its visible label/role. State the value explicitly.
 
 **Correct decomposition example:**
 ```
@@ -34,14 +27,12 @@ When:
 
 ## Then — assertions
 
-- **No vague words.** Ban: should / correct / works / as expected / normally, and their equivalents in the team's language (`gwt_lint.py --banned` adds more).
-  These can't be checked mechanically and hide what "pass" means.
-- **Map to an assertion.** Each `Then` states the checkable fact and the
-  Playwright-style assertion it maps to: `toHaveText / toBeVisible /
+- **No vague words.** Ban: should / correct / works / as expected / normally, and their equivalents in the language of the team. `gwt_lint.py --banned` adds more.
+  A machine cannot check these words, and they hide what "pass" means.
+- **Map to an assertion.** Each `Then` states a fact that a person can check and the
+  Playwright-style assertion that it maps to: `toHaveText / toBeVisible /
   toBeChecked / toHaveURL / toHaveCount` (or, for API, status + JSON path).
-- **Oracle for computed values.** Money/bonus/commission/quota assertions
-  compare against an oracle tool's output, three-way (`oracle == api == db`),
-  never a hand-typed number.
+- **Oracle for computed values.** Money/bonus/commission/quota assertions compare with the output of an oracle tool, three-way (`oracle == api == db`). Do not use a number that you typed by hand.
 
 **Example:**
 ```
@@ -53,12 +44,9 @@ Then:
 
 ## [Helper] labels
 
-- Each `When`/`Then` step may carry `[Helper: name]` from `<project>/helpers-inventory.md`.
-- A labeled step is automatable now; an unlabeled step is honest natural
-  language pending a helper — partial automation, by design.
-- Don't invent skill names. If a needed helper doesn't exist, leave the step
-  unlabeled and list the proposed helper under "Proposed helpers" at the case
-  bottom for the inventory owner to add.
+- Each `When`/`Then` step can have `[Helper: name]` from `<project>/helpers-inventory.md`.
+- A labeled step is automatable now. An unlabeled step is honest natural language that waits for a helper. This gives partial automation, by design.
+- Do not invent skill names. If a needed helper does not exist, leave the step unlabeled. List the proposed helper under "Proposed helpers" at the bottom of the case. The owner of the inventory adds it.
 
 ## Self-check (run before lint, then `gwt_lint.py` confirms mechanically)
 
@@ -73,5 +61,4 @@ Then:
 9. Does the case trace to its `scenario_id` / `goal_id` / `spec_ac`?
 10. Is `automatable` set honestly (T only if every step is labeled)?
 
-`gwt_lint.py` checks the mechanical subset (1, 2, 4, 5, 8). Items 3, 6, 7, 9, 10
-need your judgment — do them by hand before presenting.
+`gwt_lint.py` checks the mechanical subset (1, 2, 4, 5, 8). Items 3, 6, 7, 9, 10 need your judgment. Do them by hand before you present the case.

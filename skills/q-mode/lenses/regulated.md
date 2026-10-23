@@ -1,24 +1,24 @@
 # Lens: regulated
 
-An overlay for safety-related or regulated work. Stack it on top of the lens for the product's field. This lens points at where to look. It does not restate any standard. Read the applicable clauses and the project's safety or regulatory plan before deciding what a level requires.
+This lens is an overlay for safety-related or regulated work. Stack it on top of the lens for the field of the product. This lens shows where to look. It does not restate any standard. Before you decide what a level requires, read the applicable clauses and the safety or regulatory plan of the project.
 
 ## Artifact identity
-Configuration identities for every artifact: requirements, design, code, builds, test procedures, tools and their versions, and results. Tool qualification records where the standard requires them.
+Configuration identities for every artifact: requirements, design, code, builds, test procedures, tools and their versions, and results. Keep tool qualification records where the standard requires them.
 
 ## Stimulus and observation
-As in the underlying lens, plus reviews and analyses, which count as verification activities in most regimes.
+As in the underlying lens, plus reviews and analyses. In most regimes, these are verification activities.
 
 ## Instruments and trust
-Qualified or validated tools where required, calibrated instruments, and independence between author and verifier at the level the standard sets (**principle-author-is-not-approver**).
+Use qualified or validated tools where the standard requires them. Use calibrated instruments. Keep the author and the verifier independent, at the level that the standard sets (**principle-author-is-not-approver**).
 
 ## Variation and sampling
-As in the underlying lens. Sample sizes and statistical methods are often prescribed by the standard or the notified body. Use theirs.
+As in the underlying lens. The standard or the notified body often prescribes sample sizes and statistical methods. Use theirs.
 
 ## Cost and reversibility
-Late evidence gaps delay certification. Changes after verification trigger impact analysis and re-verification.
+Evidence gaps that you find late delay certification. A change after verification needs an impact analysis and re-verification.
 
 ## Oracle sources
-Requirements derived from the safety or risk analysis, the standard's clauses, and the assigned integrity level.
+Requirements from the safety or risk analysis, the clauses of the standard, and the assigned integrity level.
 
 ## Gates and standards
 | Field | Common standards | Levels | Usually matters for testing |
@@ -32,18 +32,33 @@ Requirements derived from the safety or risk analysis, the standard's clauses, a
 | Accessibility | WCAG 2.2, EN 301 549 | A, AA, AAA | Automated checks plus manual audit with assistive technology |
 | Privacy | GDPR and sector rules | n/a | Data minimization in test data, consent, deletion and export rights |
 
-Under the Digital Omnibus agreement of May 2026, EU AI Act obligations for standalone high-risk systems (Annex III) apply from 2 December 2027, and for product-embedded systems (Annex I) from 2 August 2028, while transparency obligations stayed on 2 August 2026. Confirm the dates in force before relying on them. Sources also disagree on details such as where MC/DC is mandatory versus recommended. The standard wins, and the project's safety plan decides how the team applies it.
+Under the Digital Omnibus agreement of May 2026, EU AI Act obligations for standalone high-risk systems (Annex III) apply from 2 December 2027. For product-embedded systems (Annex I), they apply from 2 August 2028. Transparency obligations stayed on 2 August 2026. Confirm the dates in force before you rely on them. Sources also disagree on details, such as where MC/DC is mandatory and where it is recommended. The standard has priority. The safety plan of the project decides how the team applies it.
 
 ## Layer ladder
 As in the underlying lens, with reviews and analyses at each level and the coverage criterion the level requires.
 
 ## Typical risks
-Orphan requirements and orphan tests, evidence tied to the wrong configuration, missing independence, unqualified tools, changes without impact analysis, and anomalies closed without risk assessment.
+These risks are typical:
+- orphan requirements and orphan tests
+- evidence tied to the wrong configuration
+- missing independence
+- unqualified tools
+- changes without impact analysis
+- anomalies that someone closed without a risk assessment
 
 ## Failure classes
 Evidence gap, traceability break, configuration mismatch between evidence and the shipped artifact.
 
 ## Playbook notes
-- **Gate review:** assemble the evidence package: the plan, bidirectional traceability (requirement → design → verification → result → artifact), results tied to configuration identities, coverage reports to the level's criterion, review records, open anomalies with risk assessment, and impact analyses for every change after verification. Every claim points at an artifact. Gaps are findings with owners.
-- **Test design:** separate verification (built right, against the specification) from validation (right thing, for the intended use). Both need evidence.
-- The **Shift-left** playbook's traceability table and `qa_status.py rtm --full` can carry the requirement-to-case chain for the testing part.
+- **Gate review:** assemble the evidence package. It contains:
+  - the plan
+  - bidirectional traceability (requirement → design → verification → result → artifact)
+  - results tied to configuration identities
+  - coverage reports to the criterion of the level
+  - review records
+  - open anomalies with risk assessment
+  - impact analyses for every change after verification
+
+  Every claim must point at an artifact. Record each gap as a finding with an owner.
+- **Test design:** keep verification (built right, against the specification) separate from validation (right thing, for the intended use). Both need evidence.
+- For the testing part, the traceability table of the **Shift-left** playbook and `qa_status.py rtm --full` can hold the requirement-to-case chain.

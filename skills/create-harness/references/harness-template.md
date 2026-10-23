@@ -1,6 +1,6 @@
 # Harness — <project>
 
-> Read cold by the next agent. Every command is real and was run. Record the last proof date.
+> The next agent reads this with no context. Every command is real and was run. Record the date of the last proof.
 > Last proven: <YYYY-MM-DD> on <environment or rig>
 
 ## Surface
@@ -41,7 +41,7 @@ Healthy output: <what it prints when fit to test>
 ## Cleanup
 
 ```sh
-<stop what this run started; never the evidence; never shared equipment>
+<stop what this run started; do not remove the evidence; do not touch shared equipment>
 ```
 
 ## Safety

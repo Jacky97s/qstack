@@ -1,7 +1,7 @@
 # qstack profile — <project>
 
-> Read by every qstack playbook. Fill every slot, or mark it `n/a: <reason>` or `unknown: <open question>`.
-> Never put secret values here. Point at where they live.
+> Every qstack playbook reads this file. Fill every slot, or mark it `n/a: <reason>` or `unknown: <open question>`.
+> Do not put secret values here. Point to the place where they are.
 
 ## Lenses
 
@@ -24,7 +24,7 @@
 | end-to-end | `<cmd>` | <time> | <parallel mode used in CI> |
 | simulation / HIL / rig | `<cmd>` | <time> | <doctor check command> |
 
-- **CI:** <where it runs, which jobs gate merges>
+- **CI:** <where it runs, which jobs must pass before a merge>
 - **Repeat or stress option:** <e.g. `--repeat-each`, `pytest --count`, rig loop command>
 
 ## Environments and rigs
@@ -73,6 +73,6 @@
 ## Tracker and people
 
 - **Tracker:** <tool and project>
-- **qstack may file tickets:** <yes | draft only>
+- **qstack can file tickets:** <yes | draft only>
 - **Test reviewers:** <who reviews tests and plans>
 - **Release decision owner:** <role>

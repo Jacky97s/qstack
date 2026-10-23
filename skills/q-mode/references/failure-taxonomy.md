@@ -1,25 +1,25 @@
 # Failure taxonomy
 
-Classify every failing test before changing anything. Group failures that share a cause first.
+Classify every failing test before you change anything. First, group the failures that share a cause.
 
 | Class | Signatures | Evidence that confirms it | Action | Never |
 |-------|-----------|---------------------------|--------|-------|
-| Product regression | Fails on the new build, passes on the last good build. Expectation matches its cited oracle source. | Same test, two builds, opposite results. The oracle source agrees with the test. | Bug report. Test stays red. | Edit the expectation to the new output. |
-| Test defect | The test's expectation contradicts its oracle source. Wrong element, wrong state, wrong data assumption. A typo or import error. | The cited source, a screenshot or DOM dump of the real state, the corrected run. | Fix the test. Cite the source in the change. | Fix it by matching whatever the system returned. |
-| Contract or doc drift | System and spec disagree, and both look deliberate. Schema snapshot out of date. | Both sides cited: the spec clause and the observed response or code path. | Report to the spec owner. Keep the test honest, marked with the open question. | Pick a side yourself. |
-| Environment or infrastructure | Many unrelated tests fail at once. Connection refused, DNS, TLS, 401 or 403 across the board, quota exceeded, a dependency down, a stale deploy. | Health checks, the deploy log, the same tests passing elsewhere at the same commit. | Report to the owner with evidence. Rerun after the fix. | Mark the tests flaky. |
-| Data collision | Passes alone, fails in the suite or in parallel. Unique-constraint errors. Counts off by the number of other tests. | Isolated pass plus suite failure, and the shared record identified. | Isolate the data. | Serialize the whole suite to hide it. |
-| Flaky | Same commit, mixed results, with counts. | A pass rate over N runs. | Flaky triage. | Rerun until green and move on. |
-| Rig, fixture, or instrument | Failures follow a station, bench, fixture, or probe rather than a unit. The doctor check or golden unit fails. Calibration out of date. | Golden unit fails on that station and passes on another. Calibration record. | Repair or recalibrate. Rerun the affected units. | Count it against the product. |
-| Unit or sample defect | One serial fails, others from the same build pass. Visible damage, assembly or component fault. | Failure analysis on the unit. Swap test (move the suspect part, see if the failure follows). | Failure analysis to root cause. Include it in the sample statistics. | Discard the unit and retest until it passes. |
-| Build or configuration mismatch | Firmware hash, hardware revision, configuration, or dependency version on the target differs from the one under test. | Recorded identities against the expected ones. | Reflash or reconfigure, record identities, rerun. | Report results for the wrong artifact. |
-| Known issue | Matches an open ticket. | The ticket link and matching signature. | Link it. Quarantine only with ticket, owner, and expiry. | Skip it silently. |
+| Product regression | The test fails on the new build and passes on the last good build. The expectation matches its cited oracle source. | The same test gives opposite results on two builds. The oracle source agrees with the test. | File a bug report. Keep the test red. | Do not edit the expectation to match the new output. |
+| Test defect | The expectation of the test contradicts its oracle source. Examples: wrong element, wrong state, wrong data assumption, a typo, or an import error. | The cited source, a screenshot or DOM dump of the real state, and the corrected run. | Fix the test. Cite the source in the change. | Do not fix the test to match whatever the system returned. |
+| Contract or doc drift | The system and the spec disagree, and both look deliberate. A schema snapshot is out of date. | Both sides are cited: the spec clause and the observed response or code path. | Report to the spec owner. Keep the test honest and mark it with the open question. | Do not pick a side yourself. |
+| Environment or infrastructure | Many unrelated tests fail at once. Examples: connection refused, DNS, TLS, 401 or 403 on all tests, quota exceeded, a dependency is down, a stale deploy. | Health checks, the deploy log, and the same tests that pass elsewhere at the same commit. | Report to the owner with evidence. Run again after the fix. | Do not mark the tests flaky. |
+| Data collision | The test passes alone and fails in the suite or in parallel. Unique-constraint errors. Counts are wrong by the number of other tests. | An isolated pass plus a suite failure, and the shared record that you identified. | Isolate the data. | Do not run the whole suite in series to hide the problem. |
+| Flaky | Same commit, mixed results, with counts. | A pass rate over N runs. | Do flaky triage. | Do not run again until green and then continue. |
+| Rig, fixture, or instrument | Failures follow a station, bench, fixture, or probe and not a unit. The doctor check or golden unit fails. Calibration is out of date. | The golden unit fails on that station and passes on another. The calibration record. | Repair or recalibrate. Run the affected units again. | Do not count the failure against the product. |
+| Unit or sample defect | One serial fails and the other units from the same build pass. Visible damage, or an assembly or component fault. | Failure analysis on the unit. A swap test (move the suspect part and see if the failure follows). | Do failure analysis to find the root cause. Include the unit in the sample statistics. | Do not discard the unit and test again until it passes. |
+| Build or configuration mismatch | The firmware hash, hardware revision, configuration, or dependency version on the target is different from the one under test. | The recorded identities and the expected identities. | Reflash or reconfigure. Record the identities. Run again. | Do not report results for the wrong artifact. |
+| Known issue | The failure matches an open ticket. | The ticket link and the matching signature. | Link the ticket. Quarantine only with a ticket, an owner, and an expiry. | Do not skip the test silently. |
 
 ## Self-fix boundary
 
 | Fix it yourself | Escalate |
 |-----------------|----------|
-| Typos, imports, assertion logic that contradicts its cited source | Credentials, access, VPN, allow-lists, environment configuration (to the operator) |
-| A locator after verifying the UI changed on purpose | Spec and system disagreeing (to the spec owner) |
-| Test-owned data isolation | A rewrite of the plan or design (to the operator) |
-| Skip reasons that cite the wrong ticket | Quarantining or deleting tests on a shared branch (to the operator) |
+| Typos, imports, and assertion logic that contradicts its cited source | Credentials, access, VPN, allow-lists, and environment configuration (to the operator) |
+| A locator, after you verify that the UI changed on purpose | The spec and the system disagree (to the spec owner) |
+| Data isolation that the test owns | A rewrite of the plan or design (to the operator) |
+| Skip reasons that cite the wrong ticket | Quarantine or deletion of tests on a shared branch (to the operator) |

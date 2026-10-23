@@ -174,7 +174,21 @@ After upgrading qstack, run `python3 <plugin>/scripts/check_playbooks.py` from y
 
 ## With pstack
 
-qstack runs on its own. With pstack also installed, product-code changes go through pstack's workflows, and qstack owns the verification and the verdict.
+qstack works alone. You do not need pstack.
+
+If you install the two plugins, they do different tasks:
+
+- pstack changes the product code. It fixes defects, adds features, and changes the structure of the code.
+- qstack does the verification. It finds the risks, makes and runs the tests, and gives the verdict.
+
+Example: a test fails in CI.
+
+1. qstack finds the type of the failure.
+2. If the product has a defect, qstack writes the defect report and the steps to reproduce it.
+3. pstack fixes the code.
+4. qstack does the same steps again in the same environment. Then it gives the verdict.
+
+If you do not install pstack, change the code with your usual method. qstack does the verification in the same way.
 
 ## Develop
 

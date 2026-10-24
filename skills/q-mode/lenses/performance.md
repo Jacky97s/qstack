@@ -47,4 +47,4 @@ Load generator saturation, environment that is not representative (size, data vo
 
 ## Playbook notes
 - **Test campaign:** run the scenario types that the question needs. Load: expected traffic. Stress: step up the load until the system breaks, and record how it fails and recovers. Spike: sudden bursts. Soak: hours at steady load, to find leaks and drift. Capacity: the highest load that still meets the SLO.
-- **Every number:** apply **principle-explain-the-number**. Name the bottleneck with evidence. Rule out the generator, errors, and caching.
+- **Every number:** apply **principle-measure-variation**. Name the bottleneck with evidence. Rule out the generator, errors, and caching.

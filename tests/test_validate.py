@@ -36,6 +36,11 @@ class Validate(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertIn("unknown principle principle-does-not-exist", out)
 
+    def test_ignores_pstack_principle(self):
+        self.append("skills/q-mode/playbooks/automate.md", "\nSee `pstack:principle-does-not-exist`.\n")
+        code, out = self.run_validate()
+        self.assertEqual(code, 0, out)
+
     def test_catches_broken_link(self):
         self.append("skills/q-mode/SKILL.md", "\n[x](references/missing.md)\n")
         self.assertIn("broken link references/missing.md", self.run_validate()[1])

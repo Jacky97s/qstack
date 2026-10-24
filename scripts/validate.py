@@ -64,7 +64,7 @@ for name, path in agents.items():
 
 LINK = re.compile(r"\]\(([^)#\s]+)(#[^)]*)?\)")
 TICKED = re.compile(r"`((?:\.\./[\w-]+/)?(?:playbooks|references|templates|scripts|lenses)/[\w./-]+\.(?:md|py|csv))`")
-PRINCIPLE = re.compile(r"\bprinciple-[a-z0-9-]+[a-z0-9]")
+PRINCIPLE = re.compile(r"(?<!pstack:)\bprinciple-[a-z0-9-]+[a-z0-9]")
 NAMESPACED = re.compile(r"`qstack:([a-z0-9-]+)`")
 
 for md in sorted(ROOT.rglob("*.md")):

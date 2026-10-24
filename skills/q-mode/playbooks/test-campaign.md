@@ -28,7 +28,7 @@ Use for any run that needs many trials, units, conditions, or hours, such as:
    - The metric implementation is right on a known case.
 5. Confirm authorization and safety: environments, units consumed, irreversible operations, and the window (**principle-protect-shared-environments**).
 6. Run it. Record identities and conditions with every result. Log anomalies when they happen. Do not reconstruct them later.
-7. Analyze the results per condition, with sample size and spread, against the decision rule. Explain each number that you report (**principle-explain-the-number**): what limits it, and why it does not measure something else.
+7. Analyze the results per condition, with sample size and spread, against the decision rule. Explain each number that you report (**principle-measure-variation**): what limits it, and why it does not measure something else.
 8. Investigate every failure to a cause. A failure in a campaign is data, not noise.
 
 **Reply:** the question and decision rule, the design, the results table per condition with sample sizes and spread, the limiter behind each key number, failures with causes, and the decision that the results support.

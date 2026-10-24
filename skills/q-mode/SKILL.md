@@ -33,7 +33,7 @@ Every testing task in every field runs this loop. A playbook is this loop made s
 4. **Design.** The cheapest layer that can show each risk (**principle-cheapest-layer-that-catches-it**), the technique, and the sample plan (**principle-measure-variation**).
 5. **Instrument.** Prove that the harness, rig, gauge, station, or grader can tell pass from fail (**principle-trust-the-instrument**).
 6. **Run.** Run on the real artifact. Record the identities. Stay inside the safety boundary (**principle-protect-shared-environments**).
-7. **Read.** Classify failures before you act (**principle-classify-before-you-fix**). Explain every number (**principle-explain-the-number**).
+7. **Read.** Classify failures before you act (**principle-classify-before-you-fix**). Report each number with its sample size, spread, and what bounds it (**principle-measure-variation**).
 8. **Verdict.** Give the verdict in the fixed vocabulary, with evidence (**principle-evidence-not-claims**). A person who did not write it must review it (**principle-author-is-not-approver**).
 9. **Decide.** A human owns the decision. qstack recommends.
 10. **Learn.** Put escapes and recurring corrections into structure: a check, a guard rule, a lens entry, or a profile slot.
@@ -77,7 +77,6 @@ Each leaf is the **principle-<name>** skill. Read it in full before you apply it
 
 **Building checks worth trusting**
 
-- **Test Behavior, Not Implementation.** Use when you write, change, or keep a test. Assert what the users of the thing observe.
 - **Deterministic Tests.** Use for any check that touches time, randomness, order, network, or concurrency.
 - **Isolate Test Data.** Use for any check that reads or writes state.
 - **Author Is Not Approver.** Use for any check or verdict that you made.
@@ -90,7 +89,8 @@ Each leaf is the **principle-<name>** skill. Read it in full before you apply it
 - **Reproduce Before Report.** Use for any defect claim.
 - **Measure Variation.** Use for anything with results that vary: AI outputs, timing, units, conditions, processes.
 - **Trust the Instrument.** Use before you trust any harness, rig, gauge, station, generator, grader, or monitor.
-- **Explain the Number.** Use before you trust, report, or act on any measured number.
+
+When pstack is installed, its `pstack:principle-test-behavior-not-implementation` and `pstack:principle-explain-the-number` cover nearby ground for product code.
 
 **Operating safely**
 

@@ -21,9 +21,6 @@ What qstack takes from pstack:
     when they change a decision, a SessionStart hook that injects the routing
     mandate, and project playbooks that extend bundled ones by anchoring to
     quoted step text.
-  - skills/principle-test-behavior-not-implementation and
-    skills/principle-explain-the-number adapt pstack's principles of the
-    same names.
   - skills/create-harness follows the shape of pstack's
     create-verification-skill and maintain-verification-skill (interview the
     repository, generate a launch, doctor, drive, evidence, and cleanup

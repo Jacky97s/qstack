@@ -29,6 +29,7 @@ When the thing under test varies, one run or one unit is an anecdote. The test b
 
 - Report rate, sample size, and spread, for each condition. "8/10 at 25 °C, 5/10 at 60 °C" is better than "mostly passes".
 - Compare like with like: the same task set or test profile, the same sample plan, and the same grader or instrument, against a baseline. The change that you see when nothing changed is your noise floor.
+- Find out why the result stops where it does. Name the resource, path, or condition that bounds it, from data taken during the run. Then rule out that the result counts something else: failures scored as passes, cached or skipped work, warm-up, or a part too small to matter end to end.
 - Gate on a threshold with tolerance. Choose it before the run.
 - Trust the instrument first (**principle-trust-the-instrument**). Measurement variation looks like product variation.
 

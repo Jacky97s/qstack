@@ -28,5 +28,6 @@ Rules:
 
 - **Do not derive the expected value by running the code under test.** A snapshot of the current behavior locks in today's bugs. You can accept it only as a labeled characterization test that pins behavior before a refactor.
 - **Assert as strongly as the contract promises.** `status == 200` alone is not an oracle when the contract promises more. The contract can promise a body, a state change, and a side effect.
+- **Check at the boundary that the consumer sees.** The oracle judges what a caller, operator, device, or downstream job can observe: outputs, errors, readable state, and effects that leave the system. Internal calls and intermediate data are not the oracle's business. A sound check goes red when the observed result breaks, and stays green when only the internal design changes. The **mutation-check** skill proves the first half.
 - **When you cannot name an oracle,** the case is a requirements question. Record it as an open question (**principle-label-the-unknowns**). Do not guess an expected value.
 - **Write the oracle source into the test or case** (`spec_ac`, a comment that names the invariant, or the oracle function). Then a reviewer can check the expectation without asking you.

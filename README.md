@@ -63,7 +63,7 @@ claim → risk → oracle → design → prove the instrument → run → read �
 | **`q-mode`** | The entry point: the core loop, non-negotiables, the principle index, lenses, the playbook router, autonomy and subagent rules, and the reporting format. |
 | **17 playbooks** | By kind of work. See [the table below](#playbooks). |
 | **10 lenses** | `software`, `firmware`, `hardware`, `manufacturing`, `performance`, `genai`, `ml-training`, `data`, `security`, and the `regulated` overlay. They stack. |
-| **16 principles** | Short, model-only rules the agent reads in full and cites when they change a decision. |
+| **14 principles** | Short, model-only rules the agent reads in full and cites when they change a decision. |
 | **7 workflow skills** | `create-harness`, `test-design-techniques`, `mutation-check`, `test-review`, `grill-the-plan`, `qstack-setup`, `qstack-help`. |
 | **2 agents** | `test-reviewer` reviews checks it did not write. `adversarial-tester` tries to break a feature on an approved environment. |
 | **Guard hook** | Blocks new fixed sleeps and reasonless skips in test code. Asks before mutating protected hosts or running irreversible device commands such as fuse burning. |
@@ -73,13 +73,12 @@ claim → risk → oracle → design → prove the instrument → run → read �
 
 | Deciding what to test | Building checks worth trusting | Reading results honestly | Operating safely |
 |---|---|---|---|
-| Oracle First | Test Behavior, Not Implementation | Evidence, Not Claims | Protect Shared Environments |
-| Risk Before Coverage | Deterministic Tests | Classify Before You Fix | |
-| Cheapest Layer That Catches It | Isolate Test Data | Flaky Is a Bug | |
-| Label the Unknowns | Author Is Not Approver | Reproduce Before Report | |
+| Oracle First | Deterministic Tests | Evidence, Not Claims | Protect Shared Environments |
+| Risk Before Coverage | Isolate Test Data | Classify Before You Fix | |
+| Cheapest Layer That Catches It | Author Is Not Approver | Flaky Is a Bug | |
+| Label the Unknowns | | Reproduce Before Report | |
 | | | Measure Variation | |
 | | | Trust the Instrument | |
-| | | Explain the Number | |
 
 ### Playbooks
 
@@ -215,7 +214,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Credits
 
-qstack is inspired by **[pstack](https://github.com/cursor/plugins/tree/main/pstack) by Lauren Tan**, and by **[pstack for Claude Code](https://github.com/michael-denyer/pstack-claude) by Michael Denyer**. From pstack come the architecture (a routing skill whose playbooks are copied into a todo list, model-only principle leaf skills, a session-start routing mandate, and project playbooks anchored to quoted step text), the two principles Test Behavior, Not Implementation and Explain the Number, and the shape of `create-harness`, which generalizes pstack's verification-skill generator.
+qstack is inspired by **[pstack](https://github.com/cursor/plugins/tree/main/pstack) by Lauren Tan**, and by **[pstack for Claude Code](https://github.com/michael-denyer/pstack-claude) by Michael Denyer**. From pstack come the architecture (a routing skill whose playbooks are copied into a todo list, model-only principle leaf skills, a session-start routing mandate, and project playbooks anchored to quoted step text), and the shape of `create-harness`, which generalizes pstack's verification-skill generator.
 
 pstack is MIT licensed. Its license texts are in [`licenses/`](licenses/), and [`NOTICE`](NOTICE) lists exactly what qstack takes from it.
 

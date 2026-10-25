@@ -58,8 +58,11 @@ Every testing task in every field runs this loop. A playbook is this loop made s
   - a saturated load generator
   - an unverified station
   - an uncalibrated grader
-- **Shared environments and irreplaceable units belong to other people.** Do not make a mutating call against a protected or shared environment. First get the explicit approval of the operator for that run. Do not do an irreversible device operation. Do not do a destructive test on allocated units. The guard hook enforces what it can see. The rule applies everywhere.
-- **No sleeps, no retry-to-green, and no skip without a reason and a ticket** (**principle-deterministic-tests**, **principle-flaky-is-a-bug**).
+- **Shared environments and irreplaceable units belong to other people.** Do not make a mutating call against a protected or shared environment. First get the explicit approval of the operator for that run. Do not do an irreversible device operation. Do not do a destructive test on allocated units. The guard hook asks only for `curl`-style HTTP mutations and test runners that name a protected host. It does not see `kubectl`, database clients, SDK calls, or a host in a variable. The rule applies to all of them.
+- **No fixed sleeps in checks.** Wait for a condition with a deadline (**principle-deterministic-tests**).
+- **No retry-to-green.** A retried pass is a flake, not a pass. Count it and report it (**principle-flaky-is-a-bug**).
+- **Every skip states its reason on the same line.** A skip that removes a check from a gate (a quarantine) also needs a ticket, an owner, and an expiry.
+- **The guard is a backstop, not the rule.** It blocks new sleeps and reasonless skips only in Write and Edit calls on test files. It does not see test files written through Bash. The rules apply there too.
 - **A system that varies gets samples, not one run.** Report rates over N trials, units, or seeds, with spread and conditions.
 - **A defect found during a task becomes its own artifact:** a defect report with a repro. Do not quietly fix product code inside a testing task, unless the task is the fix.
 - **Product code changes keep their own workflow.** If pstack is installed, send the fix through `pstack:poteto-mode` or `pstack:tdd`. qstack owns the verification and the verdict.

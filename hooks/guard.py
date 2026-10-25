@@ -51,14 +51,14 @@ REASON_ARG = re.compile(r",\s*(['\"`])[^'\"`]+\1\s*\)\s*;?\s*$")
 
 HTTP_MUTATION = re.compile(
     r"(-X|--request)\s*['\"]?(POST|PUT|PATCH|DELETE)\b"
-    r"|\s(-d|--data(-raw|-binary|-urlencode)?|-F|--form|-T|--upload-file)(\s|=)"
+    r"|\s(-d|--data(-raw|-binary|-urlencode)?|--json|-F|--form|-T|--upload-file)(\s|=|@)"
     r"|\bhttps?\s+(POST|PUT|PATCH|DELETE)\b"
     r"|--method[ =]['\"]?(POST|PUT|PATCH|DELETE)"
     r"|-Method\s+(Post|Put|Patch|Delete)",
     re.IGNORECASE,
 )
 TEST_RUNNER = re.compile(
-    r"\b(pytest|playwright|cypress|newman|k6|locust|jmeter|artillery|robot|behave"
+    r"\b(pytest|playwright|cypress|vitest|jest|mocha|newman|k6|locust|jmeter|artillery|robot|behave"
     r"|go\s+test|cargo\s+test|mvn\s+\S*\s*test|gradlew?\s+\S*test|(npm|yarn|pnpm)\s+(run\s+)?test)\b"
 )
 IRREVERSIBLE = [
@@ -143,8 +143,9 @@ def check_edit(tool, inp):
             "Fixed sleep: wait for the condition the assertion needs (web-first assertion, "
             "polling with a deadline, an awaited event). A deliberate exception carries "
             f"`{SLEEP_OK} <reason>` on the same line.\n"
-            "Skip: give a reason and a ticket on the same line (for example "
-            "`reason=\"PROJ-123 flaky upstream\"`), or `qstack: skip-reason <why>`.")
+            "Skip: give the reason on the same line (for example "
+            "`reason=\"PROJ-123 flaky upstream\"`), or `qstack: skip-reason <why>`. "
+            "A quarantine also needs a ticket, an owner, and an expiry.")
 
 
 def project_pattern(line):
@@ -160,8 +161,9 @@ def project_pattern(line):
 def check_bash(inp, cwd):
     cmd = inp.get("command", "")
     hosts = read_lines(find_qstack_file(cwd, "protected-hosts"))
-    low = cmd.lower()
-    hit = [h for h in hosts if h.lower() in low]
+    # Match whole host names: staging.example.com must not match notstaging.example.com.
+    hit = [h for h in hosts if re.search(
+        r"(?<![\w.-])" + re.escape(h) + r"(?![\w-]|\.\w)", cmd, re.IGNORECASE)]
     if hit and (HTTP_MUTATION.search(cmd) or TEST_RUNNER.search(cmd)):
         return ("ask",
                 f"qstack guard: this command may change state on protected environment(s) "

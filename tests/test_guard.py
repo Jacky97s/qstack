@@ -151,6 +151,22 @@ class Bash(unittest.TestCase):
                          ["permissionDecision"], "ask")
         self.assertEqual(self.bash("tool flash( now")["permissionDecision"], "ask")
 
+    def test_asks_for_curl_json_and_data_file(self):
+        self.assertEqual(self.bash("curl --json '{}' https://staging.example.com/api")
+                         ["permissionDecision"], "ask")
+        self.assertEqual(self.bash("curl -d@body.json https://staging.example.com/api")
+                         ["permissionDecision"], "ask")
+
+    def test_asks_before_vitest_against_protected_host(self):
+        self.assertEqual(self.bash("BASE_URL=https://staging.example.com npx vitest run")
+                         ["permissionDecision"], "ask")
+
+    def test_host_match_is_on_name_boundaries(self):
+        self.assertIsNone(self.bash("curl -X POST https://notstaging.example.com/api"))
+        self.assertIsNone(self.bash("curl -X POST https://staging.example.com.evil.io/api"))
+        self.assertEqual(self.bash("curl -X POST https://STAGING.example.com:8443/api")
+                         ["permissionDecision"], "ask")
+
     def test_ignores_other_tools(self):
         self.assertIsNone(run({"tool_name": "Read", "tool_input": {"file_path": "x"}}))
 

@@ -17,4 +17,4 @@
 | Eager test | One test checks many behaviors | One failure hides the others and the cause is not clear | One behavior per test |
 | Vague expectation | "works correctly", "as expected" in a manual case | Nobody can check it | Use a concrete fact that a person can check |
 | Exact wording pin | Asserting full error text that no caller reads | Breaks when someone edits the text | Assert the error type or code that callers use |
-| Skipped without reason | `skip`, `xit`, `@Disabled` with no ticket | Coverage is lost without a signal | Add a reason and a ticket, or delete the test |
+| Skipped without reason | `skip`, `xit`, `@Disabled` with no reason | Coverage is lost without a signal | Add the reason on the same line. A quarantine also needs a ticket, an owner, and an expiry. Or delete the test |

@@ -66,7 +66,7 @@ claim → risk → oracle → design → prove the instrument → run → read �
 | **14 principles** | Short, model-only rules the agent reads in full and cites when they change a decision. |
 | **7 workflow skills** | `create-harness`, `test-design-techniques`, `mutation-check`, `test-review`, `grill-the-plan`, `qstack-setup`, `qstack-help`. |
 | **2 agents** | `test-reviewer` reviews checks it did not write. `adversarial-tester` tries to break a feature on an approved environment. |
-| **Guard hook** | Blocks new fixed sleeps and reasonless skips in test code. Asks before mutating protected hosts or running irreversible device commands such as fuse burning. |
+| **Guard hook** | A backstop for the rules, not their enforcement. Blocks new fixed sleeps and reasonless skips in Write and Edit calls on test files. Asks before `curl`-style mutations or test runs that name a protected host, and before irreversible device commands such as fuse burning. It does not see files written through Bash or other clients such as `kubectl`, database clients, or SDKs. |
 | **References and scripts** | Spec-audit method, Given/When/Then rules, failure taxonomy, flaky causes, exploration and oracle heuristics, the AI eval method, and reliability statistics. Scripts for spec-audit coverage, case linting, and coverage checks. |
 
 ### Principles

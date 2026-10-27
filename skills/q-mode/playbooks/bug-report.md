@@ -21,7 +21,7 @@
    - notes (boundary, workaround, labeled guess at cause, repro test)
 
    The expected behavior cites its oracle source. Label a guess at the cause as a guess.
-8. Attach a failing regression test or an executable repro script when it is cheap. It is the first check of the fixer.
+8. Attach a failing regression test or an executable repro script when it is cheap. It is the first check of the fixer. A regression test that will be merged goes through the **Automate** playbook, including the `qstack:test-reviewer` review.
 9. Make a draft by default. File to the tracker only when the operator authorized filing.
 
 When the defect does not reproduce, report `INCONCLUSIVE`. Say what you tried and what can help.

@@ -26,5 +26,6 @@
    Use Given/When/Then per `references/gwt-rules.md` when you will automate the cases or hand them to someone else.
 6. Prune the cases that cannot fail differently from another case. Keep every boundary.
 7. Build the coverage matrix: rules and risks against cases. Fill each empty row with a case, or accept it explicitly as a gap.
+8. Get a fresh review: start `qstack:test-reviewer` on the cases with the oracle sources (**principle-author-is-not-approver**). Fix each confirmed finding.
 
-**Reply:** the case table, the coverage matrix, open questions, and what you deliberately do not cover and why.
+**Reply:** the case table, the coverage matrix, reviewer findings and their dispositions, open questions, and what you deliberately do not cover and why.

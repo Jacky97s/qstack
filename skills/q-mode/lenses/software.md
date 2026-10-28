@@ -31,5 +31,5 @@ Contract drift between services, data migrations, permissions, concurrency on sh
 The base taxonomy in `../references/failure-taxonomy.md` applies without change.
 
 ## Playbook notes
-- **Automate:** follow the existing conventions of the suite. Locate elements by role, label, or test id. Do not put assertions in page objects.
+- **Automate:** follow the existing conventions of the suite.
 - **Change impact:** trace the consumers of changed APIs, events, and schemas. Do not trace only the callers.

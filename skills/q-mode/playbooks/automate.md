@@ -6,7 +6,7 @@ Use for new or changed automated tests, AI-generated batches, and exploratory pa
 
 1. Read `.qstack/profile.md` and the existing suite: runner, fixtures, page objects or screen models, factories, markers or tags, naming, folder layout, and CI configuration. Follow them. Add a new framework, pattern, or dependency only with a stated reason.
 2. Pick the layer for each risk (**principle-cheapest-layer-that-catches-it**).
-3. Write the oracle first: assertions that come from the spec or contract (**principle-oracle-first**). Then write the steps. Locate elements by role, label, or test id. Wait on conditions. Create and clean up the own data of the test (**principle-deterministic-tests**, **principle-isolate-test-data**). Keep assertions out of page objects.
+3. Write the oracle first: assertions that come from the spec or contract (**principle-oracle-first**). Then write the steps. Wait on conditions. Create and clean up the own data of the test (**principle-deterministic-tests**, **principle-isolate-test-data**).
 4. Run it for real, with the same command that CI uses. Collect-only is `NOT RUN`.
 5. Watch it fail. Run it against the original bug, or plant a mutant in the behavior it protects with the **mutation-check** skill. When a test stays green against a broken version, give it a stronger oracle or delete it.
 6. Prove stability. Run it N times (at least 5, and at least 20 for end-to-end tests or anything parallel). Run it in isolation and inside the full suite, in the parallel mode that CI uses. Send any non-pass to the **Flaky triage** playbook before merge.

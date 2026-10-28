@@ -30,8 +30,7 @@ When:
 - **No vague words.** Ban: should / correct / works / as expected / normally, and their equivalents in the language of the team. `gwt_lint.py --banned` adds more.
   A machine cannot check these words, and they hide what "pass" means.
 - **Map to an assertion.** Each `Then` states a fact that a person can check and the
-  Playwright-style assertion that it maps to: `toHaveText / toBeVisible /
-  toBeChecked / toHaveURL / toHaveCount` (or, for API, status + JSON path).
+  assertion that it maps to in the framework of the project (or, for API, status + JSON path).
 - **Oracle for computed values.** Money/bonus/commission/quota assertions compare with the output of an oracle tool, three-way (`oracle == api == db`). Do not use a number that you typed by hand.
 
 **Example:**

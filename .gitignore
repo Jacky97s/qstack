@@ -3,3 +3,6 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# Eval run output: traces carry local paths and raw transcripts.
+evals/*/results*

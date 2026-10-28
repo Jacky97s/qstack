@@ -9,14 +9,23 @@
 - q-mode's playbook index and playbooks/ match exactly
 - every lens has the fixed headings in order, and the lens index and q-mode list match the files
 - plugin.json and marketplace.json parse and agree on name and version
+- in a git checkout, only tracked and staged files are checked
 - optional: no term from a local, untracked .denylist appears (keeps company names out)
 """
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+
+# In a git checkout, check only what would ship: tracked and staged files, not local scratch output.
+try:
+    listed = subprocess.run(["git", "ls-files", "-z"], cwd=ROOT, capture_output=True, text=True, check=True)
+    FILES = sorted(p for p in (ROOT / r for r in listed.stdout.split("\0") if r) if p.is_file())
+except (OSError, subprocess.CalledProcessError):
+    FILES = sorted(p for p in ROOT.rglob("*") if p.is_file() and ".git" not in p.parts)
 errors = []
 
 
@@ -67,9 +76,7 @@ TICKED = re.compile(r"`((?:\.\./[\w-]+/)?(?:playbooks|references|templates|scrip
 PRINCIPLE = re.compile(r"(?<!pstack:)\bprinciple-[a-z0-9-]+[a-z0-9]")
 NAMESPACED = re.compile(r"`qstack:([a-z0-9-]+)`")
 
-for md in sorted(ROOT.rglob("*.md")):
-    if ".git" in md.parts:
-        continue
+for md in (f for f in FILES if f.suffix == ".md"):
     text = md.read_text(encoding="utf-8")
     base = md.parent
     skill_dir = next((p for p in [md.parent, *md.parents] if (p / "SKILL.md").exists()), None)
@@ -135,8 +142,8 @@ except Exception as e:
 deny = ROOT / ".denylist"
 if deny.exists():
     terms = [t.strip() for t in deny.read_text().splitlines() if t.strip() and not t.startswith("#")]
-    for f in sorted(ROOT.rglob("*")):
-        if f.is_file() and ".git" not in f.parts and f.name != ".denylist" and f.suffix in {".md", ".py", ".json", ".sh", ".csv", ".txt"}:
+    for f in FILES:
+        if f.name != ".denylist" and f.suffix in {".md", ".py", ".json", ".sh", ".csv", ".txt"}:
             low = f.read_text(encoding="utf-8", errors="ignore").lower()
             for t in terms:
                 if t.lower() in low:

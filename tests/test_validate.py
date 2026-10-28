@@ -12,10 +12,18 @@ class Validate(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.repo = Path(self.tmp.name) / "qstack"
-        shutil.copytree(ROOT, self.repo, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+        tracked = subprocess.run(["git", "ls-files", "-z"], cwd=ROOT, capture_output=True, text=True,
+                                 check=True).stdout.split("\0")
+        for rel in filter(None, tracked):
+            (self.repo / rel).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(ROOT / rel, self.repo / rel)
 
     def tearDown(self):
         self.tmp.cleanup()
+
+    def git(self, *args):
+        subprocess.run(["git", "-c", "user.name=t", "-c", "user.email=t@t", *args], cwd=self.repo,
+                       capture_output=True, check=True)
 
     def run_validate(self):
         r = subprocess.run([sys.executable, str(self.repo / "scripts" / "validate.py")],
@@ -70,6 +78,21 @@ class Validate(unittest.TestCase):
         (self.repo / ".denylist").write_text("acme-internal\n")
         self.append("README.md", "\nBuilt for acme-internal.\n")
         self.assertIn("denylisted term 'acme-internal'", self.run_validate()[1])
+
+    def test_ignores_untracked_files_in_git_checkout(self):
+        self.git("init", "-q")
+        self.git("add", "-A")
+        (self.repo / "scratch").mkdir()
+        (self.repo / "scratch/notes.md").write_text("See **principle-does-not-exist** and [x](missing.md).\n")
+        code, out = self.run_validate()
+        self.assertEqual(code, 0, out)
+
+    def test_checks_staged_files_in_git_checkout(self):
+        self.git("init", "-q")
+        (self.repo / "scratch").mkdir()
+        (self.repo / "scratch/notes.md").write_text("See **principle-does-not-exist**.\n")
+        self.git("add", "-A")
+        self.assertIn("unknown principle principle-does-not-exist", self.run_validate()[1])
 
 
 if __name__ == "__main__":
